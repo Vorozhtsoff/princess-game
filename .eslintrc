@@ -10,7 +10,15 @@
             "error",
             { "when": "always", "children": true }
         ],
-        "no-multiple-empty-lines": ["error", { "max": 2 }]
+        "no-multiple-empty-lines": ["error", { "max": 2 }],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ]
     },
     "globals": { "window": true, "document": true }
 }
