@@ -9,7 +9,8 @@
         "react/jsx-curly-spacing": [
             "error",
             { "when": "always", "children": true }
-        ]
+        ],
+        "no-multiple-empty-lines": ["error", { "max": 2 }]
     },
     "globals": { "window": true, "document": true }
 }
