@@ -10,7 +10,7 @@ export default class App extends Component {
         this.currentUrl = e.url;
     }
 
-    render () {
+    render() {
         return (
             <div id={ styles.app }>
                 <Button>button</Button>
