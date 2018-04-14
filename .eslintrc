@@ -1,0 +1,15 @@
+{
+    "extends": ["standard", "standard-preact"],
+    "rules": {
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "comma-dangle": ["error", "never"],
+        "no-mixed-operators": [0, {}],
+        "semi": [0],
+        "react/jsx-indent": [4],
+        "react/jsx-curly-spacing": [
+            "error",
+            { "when": "always", "children": true }
+        ]
+    },
+    "globals": { "window": true, "document": true }
+}
