@@ -10,11 +10,11 @@ if (module.hot) {
 }
 
 export default class App extends Component {
-    handleRoute (e) {
+    handleRoute(e) {
         this.currentUrl = e.url;
     }
 
-    render () {
+    render() {
         return (
             <div id='app'>
                 <Header />

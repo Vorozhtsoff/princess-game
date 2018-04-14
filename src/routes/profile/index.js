@@ -8,13 +8,13 @@ export default class Profile extends Component {
     };
 
     // gets called when this route is navigated to
-    componentDidMount () {
+    componentDidMount() {
         // start a timer for the clock:
         this.timer = setInterval(this.updateTime, 1000);
     }
 
     // gets called just before navigating away from the route
-    componentWillUnmount () {
+    componentWillUnmount() {
         clearInterval(this.timer);
     }
 
@@ -28,7 +28,7 @@ export default class Profile extends Component {
     };
 
     // Note: `user` comes from the URL, courtesy of our router
-    render ({ user }, { time, count }) {
+    render({ user }, { time, count }) {
         return (
             <div class={ style.profile }>
                 <h1>Profile: { user }</h1>
