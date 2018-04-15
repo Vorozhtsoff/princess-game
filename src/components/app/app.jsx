@@ -1,9 +1,8 @@
 import { h, Component } from 'preact';
-import { Router } from 'preact-router';
 import Button from '../button';
 import styles from './app.css';
+import Router from '../../router';
 
-import Home from '../../routes/home';
 
 export default class App extends Component {
     handleRoute = (e) => {
@@ -14,9 +13,7 @@ export default class App extends Component {
         return (
             <div id={ styles.app }>
                 <Button>button</Button>
-                <Router onChange={ this.handleRoute }>
-                    <Home path='/' />
-                </Router>
+                <Router />
             </div>
         );
     }
