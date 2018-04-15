@@ -1,7 +1,11 @@
-import Home from '../components/home';
+import Main from '../components/main';
+import Settings from '../components/settings';
+import Game from '../components/game';
 
 const routes = [
-    { Component: Home, path: '/' }
+    { Component: Main, path: '/' },
+    { Component: Settings, path: '/settings' },
+    { Component: Game, path: '/game' }
 ];
 
 export default routes;

@@ -1,13 +1,13 @@
 import { h } from 'preact';
 import Router from 'preact-router';
 
-import { mapRoutesConfig } from './map-routes-config';
+import { mapRoutes } from './map-routes';
 
 
 export default (config = []) => {
     return () => (
         <Router>
-            { config.map(mapRoutesConfig) }
+            { config.map(mapRoutes) }
         </Router>
     );
 }
