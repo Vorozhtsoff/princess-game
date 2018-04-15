@@ -37,7 +37,10 @@
   "dependencies": {
     "preact": "^8.2.6",
     "preact-compat": "^3.17.0",
-    "preact-router": "^2.5.7"
+    "preact-redux": "^2.0.3",
+    "preact-router": "^2.5.7",
+    "redux": "^3.7.2",
+    "socket.io-client": "^2.1.0"
   },
   "jest": {
     "verbose": true,

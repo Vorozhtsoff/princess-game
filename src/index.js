@@ -1,8 +1,8 @@
 import './style';
-import App from './components/app';
+import Root from './root';
 
 if (module.hot) {
     require('preact/debug'); // eslint-disable-line global-require
 }
 
-export default App;
+export default Root;
