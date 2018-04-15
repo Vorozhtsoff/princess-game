@@ -3,7 +3,7 @@ const SELECT_COLOR = 'SELECT_COLOR';
 export const selectColor = payload => ({ type: SELECT_COLOR, payload });
 
 const initialState = {
-    colors: ['#9C02A7FF', '#FF5301FF', '#1634ADFF', '#FEBB02FF', '#019898FF', '#01CB01FF', '#DEF801FF'],
+    colors: ['#9C02A7', '#FF5301', '#1634AD', '#FEBB02', '#019898', '#01CB01', '#DEF801'],
     selected: null
 };
 
