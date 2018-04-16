@@ -28,6 +28,7 @@ const getArea = payload => ({ type: getAction(GET_AREA), payload });
 const getScene = payload => ({ type: getAction(GET_SCENE), payload });
 const setName = payload => ({ type: getAction(USER_LOGIN), payload });
 const changeName = payload => ({ type: getAction(CHANGE_NAME), payload });
+const getDead = payload => ({ type: getAction(DEAD), payload })
 
 export default applyListeners({
     [USER_LOGIN]: (data, store) => store.dispatch(setName(data)),
@@ -99,8 +100,8 @@ export default applyListeners({
     },
     [SHOT]: (data) => console.log(SHOT, data),
     [HIT]: (data) => console.log(HIT, data),
-    [DEAD]: (data) => {
-        console.log(data);
+    [DEAD]: (data, store) => {
+        store.dispatch(getDead(data));
         socketEmit(FINISH_GAME);
     }
 });

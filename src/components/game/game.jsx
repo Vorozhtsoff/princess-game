@@ -5,22 +5,27 @@ import { getAngle } from '../../utils/math';
 import gamepad from '../../modules/gamepad';
 import multikey from '../../modules/multikey';
 import throttle from 'lodash/throttle';
+import Modal from '../modal';
+import Button from '../button';
+import SimpleLink from '../simple-link';
+import { Link } from 'preact-router/match'
 
 import {
     SHOT,
     START_GAME,
-    USER_LOGIN,
+    FINISH_GAME,
     MOVE_PERSON
 } from '../../sockets';
 
-import './game.css';
+import styles from './game.css';
 
 const getSpeed = (x, y) => Math.sqrt(x ** 2 + y ** 2) / 10;
 
-const mapState = ({ colors, settings }) => ({
+const mapState = ({ colors, settings, result }) => ({
     selectedColor: colors.selected,
     deviceType: settings.device,
-    userId: settings.userId
+    userId: settings.userId,
+    result
 });
 
 const mapActions = {
@@ -59,10 +64,7 @@ class Game extends Component {
 
     componentWillMount() {
         const {
-            userId,
-            socketEmit,
-            deviceType,
-            selectedColor
+            socketEmit
         } = this.props;
 
         socketEmit(START_GAME);
@@ -80,10 +82,48 @@ class Game extends Component {
         multikey.setup(gamepad.events, 'qwasbv', true);
     }
 
+    componentWillUnmount() {
+        const list = document.getElementsByTagName('canvas');
+
+        Array.from(list).forEach((item) => {
+            document.body.removeChild(item);
+        });
+
+        this.props.socketEmit(FINISH_GAME);
+    }
+
     render() {
+        const { result } = this.props;
+        const { dead, name, score, kills_count } = result;
         return (
             <div>
-                Играем
+                {
+                    dead &&
+                    <Modal>
+                        <div class={ styles.tombstone }>
+                            <div class={ styles['left-side'] }>
+                                <img class={ styles['dead-title'] } src="../../img/dead-title.png" alt="ты умер в бою"/>
+                                <p class={ styles.description }>
+                                    Ты был легкой мишенью, но у тебя есть все шансы стать лидером рейтинга.
+                                    На кону брендовые трофеи ЦВТ.
+                                </p>
+                            </div>
+                            <div class={ styles['right-side'] }>
+                                { name } <br />
+                                рейтинг: { score } <br />
+                                убийств: { kills_count } <br />
+                            </div>
+                            <div class={ styles.actions }>
+                                <SimpleLink href='/'>На главную</SimpleLink>
+                                <Button>
+                                    <Link href='/settings'>
+                                        В АТАКУ!
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </Modal>
+                }
             </div>
         )
     }
