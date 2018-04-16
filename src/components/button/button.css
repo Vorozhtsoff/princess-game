@@ -1,3 +1,16 @@
 .button {
-    background: linear-gradient(180deg, #00ACB4 0%, #000000 137.94%);
+    background: linear-gradient(180deg, rgba(0, 172, 180, 0.3) 0%, rgba(0, 0, 0, 0.3) 137.94%);
+    color: #55D2FA;
+    border: 1px solid #55D2FA;
+    font-size: 20px;
+    font-family: Intro, sans-serif;
+    font-weight: 700;
+    padding: 8px 35px;
+    line-height: 1;
+    border-radius: 12px;
+}
+
+.button a {
+    color: inherit;
+    text-decoration: none;
 }

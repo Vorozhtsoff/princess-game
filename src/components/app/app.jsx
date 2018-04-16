@@ -1,6 +1,11 @@
 import { h, Component } from 'preact';
 import Router from '../../router';
+import styles from './app.css';
+import bg from './bg.png'
 
+const style = {
+    backgroundImage: `url(${bg})`
+}
 
 export default class App extends Component {
     handleRoute = (e) => {
@@ -9,7 +14,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
+            <div style={ style } class={ styles.app }>
                 <Router />
             </div>
         );

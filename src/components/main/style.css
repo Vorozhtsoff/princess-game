@@ -1,5 +1,12 @@
-.home {
-	padding: 56px 20px;
-	min-height: 100%;
-	width: 100%;
+.main {
+    padding: 40px;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 40px;
+}
+
+.actions {
+    text-align: center;
 }

@@ -3,6 +3,7 @@ import { Link } from 'preact-router/match';
 import { connect } from 'preact-redux';
 
 import Button from '../button';
+import style from './style.css';
 
 import { selectColor } from '../../reducers/colors';
 import { getRandomColor } from '../../utils';
@@ -31,11 +32,14 @@ class Settings extends Component {
                 Меняем цвет,
                 Меняем ник
                 выбранный цвет: { this.props.selectedColor }
-                <Button>
-                    <Link href={ '/game' }>
-                        Играть
-                    </Link>
-                </Button>
+
+                <div class={ style.actions }>
+                    <Button>
+                        <Link href={ '/game' }>
+                            Играть
+                        </Link>
+                    </Button>
+                </div>
             </div>
         );
     }
