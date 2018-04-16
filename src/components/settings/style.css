@@ -2,3 +2,39 @@
 .actions {
     text-align: center;
 }
+
+.color {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    box-shadow: 3px 3px rgba(0,0,0, .3)
+}
+
+.color-changer {
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.left-arrow {
+    transform: translateY(-5px);
+    height: 64px;
+    width: 64px;
+    background: url('../../img/left.png') no-repeat;
+    background-size: cover;
+}
+
+.right-arrow {
+    transform: translateY(-5px);
+    height: 64px;
+    width: 64px;
+    background: url('../../img/right.png') no-repeat;
+    background-size: cover;
+}
+
+.page-settings {
+    padding: 50px 0 0;
+}
