@@ -65,12 +65,6 @@ class Game extends Component {
             selectedColor
         } = this.props;
 
-        socketEmit(USER_LOGIN, {
-            type: deviceType,
-            id: userId,
-            color: selectedColor
-        });
-
         socketEmit(START_GAME);
 
         gamepad.setup({

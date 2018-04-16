@@ -1,5 +1,6 @@
 export const USER_LOGIN = 'USER_LOGIN';
 export const CHANGE_NAME = 'CHANGE_NAME';
+export const CHANGE_COLOR = 'CHANGE_COLOR';
 export const START_GAME = 'START_GAME';
 export const FINISH_GAME = 'FINISH_GAME';
 export const GET_AREA = 'GET_AREA';

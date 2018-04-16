@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { Link } from 'preact-router/match';
+import { socketEmit } from '../../modules/redux-socket';
 import { connect } from 'preact-redux';
 
 import Button from '../button';
@@ -7,17 +8,19 @@ import style from './style.css';
 
 import { selectColor } from '../../reducers/colors';
 import { getRandomColor } from '../../utils';
-import { CHANGE_COLOR } from '../../sockets'
+import { CHANGE_COLOR, CHANGE_NAME } from '../../sockets'
 
 
-const mapState = ({ settings, colors }) => ({
+const mapState = ({ settings, colors, app }) => ({
     settings,
     colors: colors.colors,
-    selectedColor: colors.selected
+    selectedColor: colors.selected,
+    name: app.name
 })
 
 const mapActions = {
-    selectColor
+    selectColor,
+    socketEmit
 }
 
 
@@ -47,10 +50,21 @@ class Settings extends Component {
         this.colorUpdate(newColor);
     }
 
+    handleChangeName = () => {
+        this.props.socketEmit(CHANGE_NAME);
+    }
+
     render() {
-        const { selectedColor } = this.props;
+        const { selectedColor, name } = this.props;
         return (
             <div class={ style['page-settings'] }>
+                <div class={ style['name-block'] }>
+                    <p class={ style.name} >{ name }</p>
+                    <div
+                        onClick={ this.handleChangeName }
+                        class={ style['right-arrow'] }
+                    />
+                </div>
                 <div class={ style['color-changer'] }>
                     <div
                         onClick={ this.handleLeftArrow }

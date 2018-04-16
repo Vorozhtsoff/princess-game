@@ -8,12 +8,13 @@ import {
     FINISH_GAME,
     DEAD,
     SHOT,
-    HIT
+    HIT,
+    CHANGE_NAME
 } from './event-types';
 
 let canvas = null;
 
-const getAction = (type) => `SOCKET_${type}`;
+export const getAction = (type) => `SOCKET_ON_${type}`;
 
 const drawDragon = ({ position, size }) => (
     canvas.point(position.x, position.y, size, 'blue')
@@ -25,9 +26,11 @@ const drawBoom = ({ x, y, radius }) => (
 
 const getArea = payload => ({ type: getAction(GET_AREA), payload });
 const getScene = payload => ({ type: getAction(GET_SCENE), payload });
+const setName = payload => ({ type: getAction(USER_LOGIN), payload });
+const changeName = payload => ({ type: getAction(CHANGE_NAME), payload });
 
 export default applyListeners({
-    [USER_LOGIN]: (data, store) => console.log('USER_LOGIN', data),
+    [USER_LOGIN]: (data, store) => store.dispatch(setName(data)),
     [GET_AREA]: (data, store) => {
         canvas = Canvas({
             area: {
@@ -43,6 +46,7 @@ export default applyListeners({
 
         store.dispatch(getArea(data));
     },
+    [CHANGE_NAME]: (data, store) => store.dispatch(changeName(data)),
     [GET_SCENE]: (data, store) => {
         const CROSS = 1;
 
