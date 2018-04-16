@@ -15,7 +15,7 @@ html, body {
     box-sizing: border-box;
 }
 
-#controller {
-    position: absolute;
+canvas {
+    position: asbsolute;
     top: 0;
 }
