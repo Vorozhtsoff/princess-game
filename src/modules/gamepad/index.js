@@ -7,7 +7,7 @@ import colors from './config/colors';
 import getWindowSize from './utils/get-window-size';
 import getButtonsLayouts from './config/buttons-layouts';
 import roundReact from './utils/round-react';
-import { toDec, toInt } from '../utils/math';
+import { toDec, toInt } from './utils/math';
 import drawStick from './draw/stick';
 import {
     TOP_LEFT,
@@ -780,7 +780,7 @@ const emitChanges = (map, cb) => {
     const newMap = cloneDeep(map);
     const isDiff = !isEqual(newMap, defaultMap);
     if (isDiff) {
-        cb({ ...newMap });
+        cb(Object.assign({}, newMap));
     }
 };
 

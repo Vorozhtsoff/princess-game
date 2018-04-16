@@ -3,10 +3,9 @@ import { SOCKET_EMIT } from './types';
 
 
 function socketEmit(socket, { eventName, payload }) {
-    if (isNill(eventName) || isNill(payload)) {
+    if (isNill(eventName)) {
         return null;
     }
-
     return socket.emit(eventName, payload);
 }
 

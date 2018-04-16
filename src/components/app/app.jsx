@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import styles from './app.css';
 import Router from '../../router';
 
 
@@ -10,7 +9,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <div id={ styles.app }>
+            <div>
                 <Router />
             </div>
         );

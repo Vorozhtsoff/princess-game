@@ -1,5 +1,9 @@
+import { auth } from '../utils';
+
+
 const initialState = {
-    device: 'phone'
+    device: 'phone',
+    userId: auth()
 }
 
 export default function settingsReducer(state = initialState, action) {

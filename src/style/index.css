@@ -14,3 +14,8 @@ html, body {
 * {
     box-sizing: border-box;
 }
+
+#controller {
+    position: absolute;
+    top: 0;
+}
