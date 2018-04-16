@@ -41,6 +41,8 @@ export default function Canvas({
     addListeners(canvas, eventMap);
 
     return {
+        canvas,
+        context,
         xg: x => (x * area.width) / width + area.left,
         yg: y => (area.height * (height - y)) / height + area.bottom,
         polygon(points, color) {
