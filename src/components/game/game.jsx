@@ -6,10 +6,7 @@ import gamepad from '../../modules/gamepad';
 import multikey from '../../modules/multikey';
 import throttle from 'lodash/throttle';
 import Modal from '../modal';
-import Button from '../button';
-import SimpleLink from '../simple-link';
 import GameResult from '../game-result';
-import { Link } from 'preact-router/match';
 import { resetResult } from '../../reducers/result';
 
 import {
@@ -18,6 +15,9 @@ import {
     FINISH_GAME,
     MOVE_PERSON
 } from '../../sockets';
+
+
+const getSize = v => `${parseInt(v)}px`;
 
 const getSpeed = (x, y) => Math.sqrt(x ** 2 + y ** 2) / 10;
 
@@ -99,6 +99,13 @@ class Game extends Component {
         const { dead, name, score, kills_count: kills } = result;
         return (
             <div>
+                <div
+                    style={ {
+                        width: getSize(window.innerWidth * 0.6936 + 35),
+                        height: getSize(window.innerHeight * 0.6937 + 24)
+                    } }
+                    class={ 'mapWrapper' }
+                />
                 {
                     dead &&
                     <Modal>

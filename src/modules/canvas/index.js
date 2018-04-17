@@ -15,12 +15,18 @@ const initialArea = {
 
 export default function Canvas({
     parent = 'body',
+    className,
     width = 300,
     height = 300,
     area = initialArea,
     callbacks = {}
 } = {}) {
     const canvas = document.createElement('canvas');
+
+    if (className) {
+        canvas.classList.add(className);
+    }
+
     const context = canvas.getContext('2d');
     const eventMap = {
         wheel: setFunc(callbacks.wheel),
