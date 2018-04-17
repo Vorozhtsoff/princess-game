@@ -5,7 +5,8 @@
         "comma-dangle": ["error", "never"],
         "no-mixed-operators": [0, {}],
         "semi": [0],
-        "react/jsx-indent": [4],
+        "react/jsx-indent": [4, 4],
+        "react/jsx-indent-props": [4, 4],
         "react/jsx-curly-spacing": [
             "error",
             { "when": "always", "children": true }
