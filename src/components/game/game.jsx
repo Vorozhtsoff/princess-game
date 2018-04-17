@@ -8,6 +8,7 @@ import throttle from 'lodash/throttle';
 import Modal from '../modal';
 import Button from '../button';
 import SimpleLink from '../simple-link';
+import GameResult from '../game-result';
 import { Link } from 'preact-router/match';
 import { resetResult } from '../../reducers/result';
 
@@ -17,8 +18,6 @@ import {
     FINISH_GAME,
     MOVE_PERSON
 } from '../../sockets';
-
-import styles from './game.css';
 
 const getSpeed = (x, y) => Math.sqrt(x ** 2 + y ** 2) / 10;
 
@@ -96,36 +95,18 @@ class Game extends Component {
         this.props.socketEmit(FINISH_GAME);
     }
 
-    render() {
-        const { result } = this.props;
-        const { dead, name, score, kills_count } = result;
+    render({ result }) {
+        const { dead, name, score, kills_count: kills } = result;
         return (
             <div>
                 {
                     dead &&
                     <Modal>
-                        <div class={ styles.tombstone }>
-                            <div class={ styles['left-side'] }>
-                                <img class={ styles['dead-title'] } src="../../img/dead-title.png" alt="ты умер в бою"/>
-                                <p class={ styles.description }>
-                                    Ты был легкой мишенью, но у тебя есть все шансы стать лидером рейтинга.
-                                    На кону брендовые трофеи ЦВТ.
-                                </p>
-                            </div>
-                            <div class={ styles['right-side'] }>
-                                { name } <br />
-                                рейтинг: { score } <br />
-                                убийств: { kills_count } <br />
-                            </div>
-                            <div class={ styles.actions }>
-                                <SimpleLink href='/'>На главную</SimpleLink>
-                                <Button>
-                                    <Link href='/settings'>
-                                        В АТАКУ!
-                                    </Link>
-                                </Button>
-                            </div>
-                        </div>
+                        <GameResult
+                            name={ name }
+                            score={ score }
+                            kills={ kills }
+                        />
                     </Modal>
                 }
             </div>
