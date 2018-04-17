@@ -8,7 +8,8 @@ import throttle from 'lodash/throttle';
 import Modal from '../modal';
 import Button from '../button';
 import SimpleLink from '../simple-link';
-import { Link } from 'preact-router/match'
+import { Link } from 'preact-router/match';
+import { resetResult } from '../../reducers/result';
 
 import {
     SHOT,
@@ -29,7 +30,8 @@ const mapState = ({ colors, settings, result }) => ({
 });
 
 const mapActions = {
-    socketEmit
+    socketEmit,
+    resetResult
 };
 
 class Game extends Component {
@@ -64,9 +66,11 @@ class Game extends Component {
 
     componentWillMount() {
         const {
-            socketEmit
+            socketEmit,
+            resetResult
         } = this.props;
 
+        resetResult();
         socketEmit(START_GAME);
 
         gamepad.setup({
