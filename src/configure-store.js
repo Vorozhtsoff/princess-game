@@ -2,6 +2,7 @@ import io from 'socket.io-client';
 import { createStore, compose, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import { createSocketMiddleware } from './modules/redux-socket';
+import thunk from 'redux-thunk';
 
 import { listeners, config } from './sockets';
 
@@ -15,7 +16,10 @@ export default function configureStore(initState = {}) {
         reducers,
         initState,
         composeEnhancers(
-            applyMiddleware(createSocketMiddleware(io(config.HOST), listeners))
+            applyMiddleware(
+                thunk,
+                createSocketMiddleware(io(config.HOST), listeners)
+            )
         )
     );
 
