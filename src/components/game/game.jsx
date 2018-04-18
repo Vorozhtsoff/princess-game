@@ -21,8 +21,8 @@ const getSize = v => `${parseInt(v)}px`;
 
 const getSpeed = (x, y) => Math.sqrt(x ** 2 + y ** 2) / 10;
 
-const mapState = ({ colors, settings, result }) => ({
-    selectedColor: colors.selected,
+const mapState = ({ app, settings, result }) => ({
+    selectedColor: app.color,
     deviceType: settings.device,
     userId: settings.userId,
     result
