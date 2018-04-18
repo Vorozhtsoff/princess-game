@@ -10,7 +10,6 @@ const initialState = {
 export const SELECT_COLOR = 'SELECT_COLOR';
 export const selectColor = color => {
     localStorage.setItem('color', color);
-
     return { type: SELECT_COLOR, payload: color };
 };
 
@@ -19,17 +18,24 @@ export const getColor = (colors) => {
 
     if (!color) {
         color = getRandomColor(colors);
-        localStorage.setItem('color', color);
+        color = localStorage.setItem('color', color);
     }
 
     return { type: SELECT_COLOR, payload: color };
 }
 
+const GET_NAME = 'GET_NAME';
+export const getName = () => ({
+    type: GET_NAME,
+    payload: localStorage.getItem('name')
+})
+
 export default function appReducer(state = initialState, action) {
     switch (action.type) {
-        case getAction(CHANGE_NAME): return { ...state, ...action.payload }
-        case getAction(USER_LOGIN): return { ...state, ...action.payload }
-        case SELECT_COLOR: return { ...state, color: action.payload }
+        case getAction(CHANGE_NAME): return { ...state, ...action.payload };
+        case getAction(USER_LOGIN): return { ...state, ...action.payload };
+        case SELECT_COLOR: return { ...state, color: action.payload };
+        case GET_NAME: return { ...state, name: action.payload };
         default: return state;
     }
 }

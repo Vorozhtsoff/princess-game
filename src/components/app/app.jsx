@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 import Router from '../../router';
 import { socketEmit } from '../../modules/redux-socket';
-import { getColor } from '../../reducers/app';
+import { getColor, getName } from '../../reducers/app';
 import styles from './app.css';
 import bg from './bg.png';
 
@@ -17,6 +17,7 @@ const style = {
 
 const mapState = ({ settings, app }) => ({
     selectedColor: app.color,
+    name: app.name,
     deviceType: settings.device,
     colors: settings.colors,
     userId: settings.userId
@@ -24,29 +25,39 @@ const mapState = ({ settings, app }) => ({
 
 const mapAction = {
     socketEmit,
-    getColor
+    getColor,
+    getName
 };
 
 class App extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const {
+            name,
             colors,
             userId,
+            getName,
             getColor,
             socketEmit,
             deviceType,
             selectedColor
         } = this.props;
-        let newColor = null;
+        let n = null;
+        let c = null;
+
+
+        if (!name) {
+            n = getName().payload;
+        }
 
         if (!selectedColor) {
-            newColor = getColor(colors).payload;
+            c = getColor(colors).payload;
         }
 
         socketEmit(USER_LOGIN, {
             type: deviceType,
             id: userId,
-            color: selectedColor || newColor
+            color: selectedColor || c,
+            name: name || n
         });
     }
 

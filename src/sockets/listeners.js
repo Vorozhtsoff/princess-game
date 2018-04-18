@@ -1,5 +1,5 @@
 import { applyListeners, socketEmit } from '../modules/redux-socket';
-import { iterateObject } from '../utils';
+import { iterateObject, localStorage } from '../utils';
 import Canvas from '../modules/canvas';
 import {
     USER_LOGIN,
@@ -31,7 +31,10 @@ const changeName = payload => ({ type: getAction(CHANGE_NAME), payload });
 const getDead = payload => ({ type: getAction(DEAD), payload })
 
 export default applyListeners({
-    [USER_LOGIN]: (data, store) => store.dispatch(setName(data)),
+    [USER_LOGIN]: (data, store) => {
+        localStorage.setItem('name', data.name);
+        return store.dispatch(setName(data))
+    },
     [GET_AREA]: (data, store) => {
         canvas = Canvas({
             area: {
@@ -49,7 +52,10 @@ export default applyListeners({
 
         store.dispatch(getArea(data));
     },
-    [CHANGE_NAME]: (data, store) => store.dispatch(changeName(data)),
+    [CHANGE_NAME]: (data, store) => {
+        localStorage.setItem('name', data.name);
+        store.dispatch(changeName(data))
+    },
     [GET_SCENE]: (data, store) => {
         const CROSS = 1;
 
