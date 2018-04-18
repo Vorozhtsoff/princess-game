@@ -9,3 +9,4 @@ export const MOVE_PERSON = 'MOVE_PERSON';
 export const SHOT = 'SHOT';
 export const HIT = 'HIT';
 export const DEAD = 'DEAD';
+export const DEAD_TO = 'DEAD_TO';

@@ -97,7 +97,7 @@ class Game extends Component {
     }
 
     render({ result }) {
-        const { dead, name, score, kills_count: kills } = result;
+        const { dead, name, score, kills_count: kills, isDragonKiller } = result;
         return (
             <div>
                 <div
@@ -108,13 +108,12 @@ class Game extends Component {
                     class={ 'mapWrapper' }
                 />
                 {
-                    true &&
+                    isDragonKiller &&
                         <Modal>
                             <DragonKiller
                             />
                         </Modal>
                 }
-
                 {
                     dead &&
                     <Modal>

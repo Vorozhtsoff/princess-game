@@ -1,9 +1,11 @@
 import { applyListeners, socketEmit } from '../modules/redux-socket';
 import { iterateObject, localStorage } from '../utils';
 import Canvas from '../modules/canvas';
+import { detectDragonKill } from '../reducers/result';
 import {
     USER_LOGIN,
     GET_AREA,
+    DEAD_TO,
     GET_SCENE,
     FINISH_GAME,
     DEAD,
@@ -14,7 +16,19 @@ import {
 
 let canvas = null;
 
-export const getAction = (type) => `SOCKET_ON_${type}`;
+export const DRAGON = 'dragon';
+export const PRINCESS = 'princess';
+
+const playerTypes = {
+    dragon: DRAGON,
+    phone: PRINCESS
+};
+
+
+export const getAction = (type) => {
+    console.log(type, `SOCKET_ON_${type}`)
+    return `SOCKET_ON_${type}`;
+};
 
 const drawDragon = ({ position, size }) => (
     canvas.point(position.x, position.y, size, 'blue')
@@ -23,6 +37,25 @@ const drawDragon = ({ position, size }) => (
 const drawBoom = ({ x, y, radius }) => (
     radius > 0 && canvas.point(x, y, radius, 'black')
 );
+
+
+const onAnyKill = payload => ({
+    type: getAction(DEAD_TO),
+    payload
+});
+
+const isDragon = type => type === DRAGON;
+
+const onKill = type => (dispatch) => {
+    const correctedType = playerTypes[type];
+
+    dispatch(onAnyKill(correctedType));
+
+    if (isDragon(correctedType)) {
+        dispatch(socketEmit(FINISH_GAME));
+        dispatch(detectDragonKill())
+    }
+}
 
 const getArea = payload => ({ type: getAction(GET_AREA), payload });
 const getScene = payload => ({ type: getAction(GET_SCENE), payload });
@@ -106,6 +139,7 @@ export default applyListeners({
 
         store.dispatch(getScene(data));
     },
+    [DEAD_TO]: (data, store) => store.dispatch(onKill(data)),
     [SHOT]: (data) => console.log(SHOT, data),
     [HIT]: (data) => console.log(HIT, data),
     [DEAD]: (data, store) => {
