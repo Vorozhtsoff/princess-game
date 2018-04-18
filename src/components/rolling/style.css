@@ -1,10 +1,29 @@
 .main {
+    background: url('../../img/bg.png') no-repeat;
+    background-size: cover;
+    background-position: 0 -100px;
     padding: 40px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.blockCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo {
     display: block;
-    margin: 0 auto 40px;
+    margin-bottom: 40px;
+}
+
+.messageImage {
+    translate: transform .3s, margin .5s;
 }
 
 .message {
@@ -20,10 +39,10 @@
 }
 
 @media screen and (orientation:landscape) {
+    .messageImage,
     .message {
-        transform: translate(-1000px, 0);
+        transform: translate(-2000px, 0);
         padding: 0;
-        marging: 0;
         height: 0;
         line-height: 1.3;
     }
