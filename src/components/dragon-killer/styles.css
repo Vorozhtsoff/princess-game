@@ -1,0 +1,36 @@
+.wrapper {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blockCenter {
+    display: block;
+    margin: 0 auto;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.inner {
+
+}
+
+.text {
+    text-align: center;
+    line-height: 1.35;
+    margin-bottom: 12px;
+}
+
+.subtext {
+    color: #fff;
+    text-align: center;
+    line-height: 1.35;
+}

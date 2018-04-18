@@ -7,6 +7,7 @@ import multikey from '../../modules/multikey';
 import throttle from 'lodash/throttle';
 import Modal from '../modal';
 import GameResult from '../game-result';
+import DragonKiller from '../dragon-killer';
 import { resetResult } from '../../reducers/result';
 
 import {
@@ -106,6 +107,14 @@ class Game extends Component {
                     } }
                     class={ 'mapWrapper' }
                 />
+                {
+                    true &&
+                        <Modal>
+                            <DragonKiller
+                            />
+                        </Modal>
+                }
+
                 {
                     dead &&
                     <Modal>
