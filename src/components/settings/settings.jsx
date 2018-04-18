@@ -25,9 +25,6 @@ const mapActions = {
 
 
 class Settings extends Component {
-    componentWillMount() {
-    }
-
     colorUpdate = (color) => {
         const { selectColor, socketEmit } = this.props;
         selectColor(color);

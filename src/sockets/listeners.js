@@ -33,11 +33,6 @@ const getDead = payload => ({ type: getAction(DEAD), payload })
 export default applyListeners({
     [USER_LOGIN]: (data, store) => store.dispatch(setName(data)),
     [GET_AREA]: (data, store) => {
-        console.log(
-            'getArea',
-            document.querySelector('.mapWrapper')
-        );
-
         canvas = Canvas({
             area: {
                 left: data.CENTER.x - data.X_SIZE / 2,
