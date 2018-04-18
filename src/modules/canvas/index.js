@@ -19,6 +19,7 @@ export default function Canvas({
     width = 300,
     height = 300,
     area = initialArea,
+    image = null,
     callbacks = {}
 } = {}) {
     const canvas = document.createElement('canvas');
@@ -65,8 +66,12 @@ export default function Canvas({
             }
         },
         clear(color) {
-            context.fillStyle = color || '#d0d0d0';
-            context.fillRect(0, 0, width, height);
+            if (image) {
+                context.drawImage(image, 0, 0, width, height);
+            } else {
+                context.fillStyle = color || '#d0d0d0';
+                context.fillRect(0, 0, width, height);
+            }
         },
         point(x, y, radius, color) {
             context.fillStyle = color || '#FF0000';

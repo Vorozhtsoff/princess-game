@@ -24,6 +24,9 @@ const playerTypes = {
     phone: PRINCESS
 };
 
+const img = new Image();
+img.src = '/assets/img/map.png';
+
 
 export const getAction = (type) => {
     console.log(type, `SOCKET_ON_${type}`)
@@ -77,6 +80,7 @@ export default applyListeners({
                 height: data.Y_SIZE,
                 z: data.Z_SIZE
             },
+            image: img,
             className: 'map',
             parent: '.mapWrapper',
             width: window.innerWidth * 0.6936,
