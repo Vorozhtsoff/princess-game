@@ -2,9 +2,11 @@ import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 import Router from '../../router';
 import { socketEmit } from '../../modules/redux-socket';
-import { getColor, getName } from '../../reducers/app';
+import { getColor, getName, updateOrientation } from '../../reducers/app';
 import { fullScreen } from '../../utils';
 import createHashHistory from 'history/createHashHistory';
+
+import SizeObserver from '../size-observer';
 
 import styles from './app.css';
 
@@ -24,6 +26,7 @@ const mapState = ({ settings, app }) => ({
 });
 
 const mapAction = {
+    updateOrientation,
     socketEmit,
     getColor,
     getName
@@ -39,7 +42,8 @@ class App extends Component {
             getColor,
             socketEmit,
             deviceType,
-            selectedColor
+            selectedColor,
+            updateOrientation
         } = this.props;
         let n = null;
         let c = null;
@@ -80,10 +84,15 @@ class App extends Component {
         fullScreen(document.body);
     }
 
+    handlerSize = (e) => {
+        console.log(e);
+    }
+
 
     render() {
         return (
             <div onClick={ this.getFullscreen } class={ styles.wrapper }>
+                <SizeObserver onResize={ this.props.updateOrientation } />
                 <div ref={ this.appRef } class={ styles.app }>
                     <Router history={ createHashHistory() } />
                 </div>

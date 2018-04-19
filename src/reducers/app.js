@@ -25,17 +25,24 @@ export const getColor = (colors) => {
     return { type: SELECT_COLOR, payload: color };
 }
 
+const UPDATE_ORIENTATION = 'UPDATE_ORIENTATION';
+export const updateOrientation = payload => ({
+    type: UPDATE_ORIENTATION,
+    payload
+})
+
 const GET_NAME = 'GET_NAME';
 export const getName = () => ({
     type: GET_NAME,
     payload: localStorage.getItem('name')
-})
+});
 
 export default function appReducer(state = initialState, action) {
     switch (action.type) {
         case getAction(CHANGE_NAME): return { ...state, ...action.payload };
         case getAction(USER_LOGIN): return { ...state, ...action.payload, isLogged: true };
         case SELECT_COLOR: return { ...state, color: action.payload };
+        case UPDATE_ORIENTATION: console.log(UPDATE_ORIENTATION); return { ...state, ...action.payload };
         case GET_NAME: return { ...state, name: action.payload };
         default: return state;
     }
