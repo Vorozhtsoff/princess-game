@@ -62,7 +62,12 @@ export default applyListeners({
         localStorage.setItem('name', data.name);
         store.dispatch(changeName(data))
     },
-    [GET_SCENE]: (data, store) => store.dispatch(getScene(data)),
+    [GET_SCENE]: (data, store) => {
+        const state = store.getState();
+        if (state.app.isLogged) {
+            store.dispatch(getScene(data));
+        };
+    },
     [DEAD_TO]: (data, store) => store.dispatch(onKill(data)),
     [SHOT]: (data) => console.log(SHOT, data),
     [HIT]: (data) => console.log(HIT, data),
