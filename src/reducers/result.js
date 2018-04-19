@@ -1,5 +1,5 @@
 import { getAction } from '../sockets/listeners';
-import { DEAD, DEAD_TO } from '../sockets';
+import { DEAD, DEAD_TO, GET_STATISTIC_SINGLE } from '../sockets';
 
 const initialState = {
     isDragonKiller: false,
@@ -16,8 +16,11 @@ export default function resultReducer(state = {}, action) {
     switch (action.type) {
         case getAction(DEAD): return { ...action.payload, dead: true };
         case getAction(DEAD_TO): return state;
+        case getAction(GET_STATISTIC_SINGLE): {
+            return { ...state, ...action.payload };
+        }
         case DETECT_DRAGON_KILL: return { ...state, isDragonKiller: true };
-        case RESET_RESULT: return initialState;
+        // case RESET_RESULT: return initialState;
         default: return state;
     }
 }
