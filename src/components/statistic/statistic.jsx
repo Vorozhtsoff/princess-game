@@ -3,6 +3,7 @@ import { connect } from 'preact-redux';
 import { concatClasses } from '../../utils';
 
 import styles from './statistic.css';
+import img from '../../img/cup.png';
 
 
 const mapState = ({ statistic }) => ({ statistic });
@@ -20,7 +21,7 @@ class Statistic extends Component {
         return (
             <tr class={ styles.row }>
                 <td class={ styles.number }>
-                    <img class={ styles.icon } src='../../img/cup.png' />
+                    <img class={ styles.icon } src={ img } />
                     <div class={ styles.italic }>
                         { index + 1 }
                     </div>
