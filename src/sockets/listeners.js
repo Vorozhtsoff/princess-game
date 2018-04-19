@@ -3,6 +3,7 @@ import { iterateObject, localStorage } from '../utils';
 import Canvas from '../modules/canvas';
 import { detectDragonKill } from '../reducers/result';
 import {
+    GET_STATISTIC_SINGLE,
     USER_LOGIN,
     GET_AREA,
     DEAD_TO,
@@ -29,7 +30,7 @@ img.src = '/assets/img/map.png';
 
 
 export const getAction = (type) => {
-    console.log(type, `SOCKET_ON_${type}`)
+    // console.log(type, `SOCKET_ON_${type}`)
     return `SOCKET_ON_${type}`;
 };
 
@@ -146,6 +147,7 @@ export default applyListeners({
     [DEAD_TO]: (data, store) => store.dispatch(onKill(data)),
     [SHOT]: (data) => console.log(SHOT, data),
     [HIT]: (data) => console.log(HIT, data),
+    [GET_STATISTIC_SINGLE]: (data) => console.log(GET_STATISTIC_SINGLE, data),
     [DEAD]: (data, store) => {
         store.dispatch(getDead(data));
         socketEmit(FINISH_GAME);

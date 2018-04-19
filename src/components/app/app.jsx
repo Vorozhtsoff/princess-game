@@ -4,11 +4,13 @@ import Router from '../../router';
 import { socketEmit } from '../../modules/redux-socket';
 import { getColor, getName } from '../../reducers/app';
 import styles from './app.css';
-import bg from './bg.png';
+import bg from '../../img/bg.png';
+import Rolling from '../rolling';
 
 
 import {
-    USER_LOGIN
+    USER_LOGIN,
+    GET_STATISTIC_SINGLE
 } from '../../sockets';
 
 const style = {
@@ -44,7 +46,6 @@ class App extends Component {
         let n = null;
         let c = null;
 
-
         if (!name) {
             n = getName().payload;
         }
@@ -59,6 +60,7 @@ class App extends Component {
             color: selectedColor || c,
             name: name || n
         });
+        socketEmit(GET_STATISTIC_SINGLE);
     }
 
 

@@ -10,3 +10,4 @@ export const SHOT = 'SHOT';
 export const HIT = 'HIT';
 export const DEAD = 'DEAD';
 export const DEAD_TO = 'DEAD_TO';
+export const GET_STATISTIC_SINGLE = 'GET_STATISTIC_SINGLE';
