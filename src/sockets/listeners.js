@@ -1,4 +1,5 @@
 import { applyListeners, socketEmit } from '../modules/redux-socket';
+import deepEqual from 'deep-equal';
 import { localStorage } from '../utils';
 import { detectDragonKill } from '../reducers/result';
 import {
@@ -66,12 +67,19 @@ export default applyListeners({
         localStorage.setItem('name', data.name);
         store.dispatch(changeName(data))
     },
-    [GET_SCENE]: (data, store) => {
-        const state = store.getState();
-        if (state.app.isLogged) {
-            store.dispatch(getScene(data));
-        };
-    },
+    [GET_SCENE]: (() => {
+        let cache = null;
+        return (data, store) => {
+            const isEqual = deepEqual(cache, data);
+            if (isEqual) return;
+            const state = store.getState();
+            cache = data;
+
+            if (state.app.isLogged) {
+                store.dispatch(getScene(data));
+            };
+        }
+    })(),
     [DEAD_TO]: (data, store) => store.dispatch(onKill(data)),
     [SHOT]: (data) => console.log(SHOT, data),
     [HIT]: (data, store) => store.dispatch(onHit({ hp: data.targetLife * 100 / INITIAL_HP })),
