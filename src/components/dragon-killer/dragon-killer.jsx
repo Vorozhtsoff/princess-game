@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import { concatClasses } from '../../utils';
 
 import styles from './styles.css';
-console.log(styles.blockCenter, styles.blockCenter);
+
 
 export default class DragonKiller extends Component {
     render() {
