@@ -43,8 +43,16 @@
     text-align: center;
     color: #56CCF2;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 9px;
     margin-right: 30px;
+}
+
+.nameInner {
+    display: flex;
+    flex-flow: nowrap;
+    max-width: 200px;
+    justify-content: flex-end;
+    white-space: nowrap;
 }
 
 .name-block {

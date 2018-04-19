@@ -3,7 +3,7 @@ import { socketEmit } from '../../modules/redux-socket';
 import { connect } from 'preact-redux';
 
 import ButtonLink from '../button-link';
-import style from './style.css';
+import styles from './settings.css';
 
 import { selectColor, getColor } from '../../reducers/app';
 import { CHANGE_COLOR, CHANGE_NAME } from '../../sockets'
@@ -51,27 +51,31 @@ class Settings extends Component {
     render() {
         const { selectedColor, name } = this.props;
         return (
-            <div class={ style['page-settings'] }>
-                <div class={ style['name-block'] }>
-                    <p class={ style.name } >{ name }</p>
+            <div class={ styles['page-settings'] }>
+                <div class={ styles['name-block'] }>
+                    <p class={ styles.name } >
+                        <div class={ styles.nameInner }>
+                            { name }
+                        </div>
+                    </p>
                     <div
                         onClick={ this.handleChangeName }
-                        class={ style['right-arrow'] }
+                        class={ styles['right-arrow'] }
                     />
                 </div>
-                <div class={ style['color-changer'] }>
+                <div class={ styles['color-changer'] }>
                     <div
                         onClick={ this.handleLeftArrow }
-                        class={ style['left-arrow'] }
+                        class={ styles['left-arrow'] }
                     />
-                    <div style={ { backgroundColor: selectedColor } } class={ style.color } />
+                    <div style={ { backgroundColor: selectedColor } } class={ styles.color } />
                     <div
                         onClick={ this.handlerRightArrow }
-                        class={ style['right-arrow'] }
+                        class={ styles['right-arrow'] }
                     />
                 </div>
 
-                <div class={ style.actions }>
+                <div class={ styles.actions }>
                     <ButtonLink href={ '/game' }>
                         Играть
                     </ButtonLink>
