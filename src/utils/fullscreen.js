@@ -1,7 +1,7 @@
 export function fullScreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
-    } else if (element.webkitrequestFullscreen) {
+    } else if (element.webkitRequestFullscreen) {
         element.webkitRequestFullscreen();
     } else if (element.mozRequestFullscreen) {
         element.mozRequestFullScreen();
