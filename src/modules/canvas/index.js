@@ -41,6 +41,8 @@ export default function Canvas({
     const ys = y => height - height * (y - area.bottom) / area.height;
     const rs = r => r / area.width * width;
 
+    console.log(width, height);
+
     canvas.width = width;
     canvas.height = height;
     document.querySelector(parent).appendChild(canvas);

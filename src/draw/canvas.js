@@ -16,7 +16,7 @@ export const drawCanvas = (data) => {
         image: img,
         className: 'map',
         parent: '.mapWrapper',
-        width: window.innerWidth * 0.6936,
-        height: window.innerHeight * 0.6937
+        width: data.width,
+        height: data.height
     })
 }

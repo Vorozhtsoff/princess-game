@@ -115,6 +115,7 @@ class Game extends Component {
     render({ result, name, canvas, map }) {
         const { dead, score, kills_count: kills, isDragonKiller } = result;
         if (Object.keys(canvas).length) {
+            console.log(canvas);
             const container = this.drawCanvas(canvas);
             drawMap(container)(map);
         }
@@ -123,8 +124,8 @@ class Game extends Component {
             <div>
                 <div
                     style={ {
-                        width: getSize(window.innerWidth * 0.6936 + 35),
-                        height: getSize(window.innerHeight * 0.6937 + 24)
+                        width: getSize(canvas.width + 35),
+                        height: getSize(canvas.height + 24)
                     } }
                     class={ 'mapWrapper' }
                 />
