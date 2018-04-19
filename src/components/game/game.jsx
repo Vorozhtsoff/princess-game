@@ -54,6 +54,10 @@ class Game extends Component {
         speed: 0
     })
 
+    setRef = (name) => (c) => {
+        this[name] = c;
+    }
+
     handleChange = (map) => {
         const axisX = map['x-axis'];
         const axisY = map['y-axis'];
@@ -115,7 +119,8 @@ class Game extends Component {
 
     render({ result, name, canvas, map }) {
         const { dead, score, kills_count: kills, isDragonKiller } = result;
-        if (Object.keys(canvas).length) {
+
+        if (Object.keys(canvas).length && this.wrapper) {
             const container = this.drawCanvas(canvas);
             drawMap(container)(map);
         }
@@ -123,6 +128,7 @@ class Game extends Component {
         return (
             <div>
                 <div
+                    ref={ this.setRef('wrapper') }
                     style={ {
                         width: getSize(canvas.width + 35),
                         height: getSize(canvas.height + 24)
