@@ -6,6 +6,7 @@ import gamepad from '../../modules/gamepad';
 import multikey from '../../modules/multikey';
 import throttle from 'lodash/throttle';
 import Modal from '../modal';
+import Table from '../table';
 import GameResult from '../game-result';
 import DragonKiller from '../dragon-killer';
 import { resetResult } from '../../reducers/result';
@@ -17,6 +18,7 @@ import {
     MOVE_PERSON
 } from '../../sockets';
 
+import styles from './game.css';
 
 const getSize = v => `${parseInt(v)}px`;
 
@@ -24,6 +26,7 @@ const getSpeed = (x, y) => Math.sqrt(x ** 2 + y ** 2) / 10;
 
 const mapState = ({ app, settings, result }) => ({
     selectedColor: app.color,
+    name: app.name,
     deviceType: settings.device,
     userId: settings.userId,
     result
@@ -96,8 +99,8 @@ class Game extends Component {
         this.props.socketEmit(FINISH_GAME);
     }
 
-    render({ result }) {
-        const { dead, name, score, kills_count: kills, isDragonKiller } = result;
+    render({ result, name }) {
+        const { dead, score, kills_count: kills, isDragonKiller } = result;
         return (
             <div>
                 <div
@@ -107,6 +110,12 @@ class Game extends Component {
                     } }
                     class={ 'mapWrapper' }
                 />
+                <div class={ styles.resultPlay }>
+                    <div class={ styles.name }>{ name }</div>
+                    <div class={ styles.scoreWrapper }>
+                        <Table score={ score } />
+                    </div>
+                </div>
                 {
                     isDragonKiller &&
                         <Modal>
@@ -116,13 +125,13 @@ class Game extends Component {
                 }
                 {
                     dead &&
-                    <Modal>
-                        <GameResult
-                            name={ name }
-                            score={ score }
-                            kills={ kills }
-                        />
-                    </Modal>
+                        <Modal>
+                            <GameResult
+                                name={ name }
+                                score={ score }
+                                kills={ kills }
+                            />
+                        </Modal>
                 }
             </div>
         )
