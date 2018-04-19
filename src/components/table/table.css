@@ -1,0 +1,25 @@
+.table {
+    padding-left: 25%;
+    font-size: 20px;
+}
+
+.tableRow {
+    display: flex;
+    flex-flow: nowrap;
+    align-items: center;
+    font-family: Ranga, sans-serif;
+    font-weight: 100;
+    font-style: italic;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.9);
+    color: #D98D41;
+}
+
+.tableRow dd {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.imgMoney {
+    position: relative;
+    top: 2px;
+}
