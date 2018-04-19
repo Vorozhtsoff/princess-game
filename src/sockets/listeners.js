@@ -44,8 +44,9 @@ const onKill = type => (dispatch) => {
         dispatch(socketEmit(FINISH_GAME));
         dispatch(detectDragonKill())
     }
-}
+};
 
+const onHit = payload => ({ type: getAction(HIT), payload });
 const getArea = payload => ({ type: getAction(GET_AREA), payload });
 const getScene = payload => ({ type: getAction(GET_SCENE), payload });
 const setName = payload => ({ type: getAction(USER_LOGIN), payload });
@@ -54,6 +55,7 @@ const getDead = payload => ({ type: getAction(DEAD), payload });
 const onGetStatisticSingle = payload => ({ type: getAction(GET_STATISTIC_SINGLE), payload });
 const onGetStatistic = payload => ({ type: getAction(GET_STATISTIC), payload });
 
+const INITIAL_HP = 10;
 export default applyListeners({
     [USER_LOGIN]: (data, store) => {
         localStorage.setItem('name', data.name);
@@ -72,7 +74,7 @@ export default applyListeners({
     },
     [DEAD_TO]: (data, store) => store.dispatch(onKill(data)),
     [SHOT]: (data) => console.log(SHOT, data),
-    [HIT]: (data) => console.log(HIT, data),
+    [HIT]: (data, store) => store.dispatch(onHit({ hp: data.targetLife * 100 / INITIAL_HP })),
     [GET_STATISTIC_SINGLE]: (data, store) => store.dispatch(onGetStatisticSingle(data)),
     [GET_STATISTIC]: (data, store) => store.dispatch(onGetStatistic(data)),
     [DEAD]: (data, store) => {

@@ -46,6 +46,8 @@ const mapActions = {
     resetResult
 };
 
+const getGradient = (percent) => `linear-gradient(to right, #EB5757 ${percent}%, #1F374C ${percent}%)`;
+
 class Game extends Component {
     interval = null;
     socketEmitThrottle = throttle((action, payload) => this.props.socketEmit(action, payload), 50)
@@ -104,7 +106,7 @@ class Game extends Component {
                 buttons: [{ name: 'a', key: 'a' }]
             });
 
-            multikey.setup(gamepad.events, 'qwasbv', true);
+            multikey.setup(gamepad.events, 'a', true);
         }
     }
 
@@ -147,6 +149,11 @@ class Game extends Component {
                     <div class={ styles.scoreWrapper }>
                         <Table score={ score } />
                     </div>
+                </div>
+                <div
+                    style={ { backgroundImage: getGradient(result.hp) } }
+                    class={ styles.hp }
+                >{ result.hp }%
                 </div>
                 {
                     isDragonKiller &&

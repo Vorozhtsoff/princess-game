@@ -42,8 +42,7 @@ class App extends Component {
             getColor,
             socketEmit,
             deviceType,
-            selectedColor,
-            updateOrientation
+            selectedColor
         } = this.props;
         let n = null;
         let c = null;
@@ -83,11 +82,6 @@ class App extends Component {
     getFullscreen = () => {
         fullScreen(document.body);
     }
-
-    handlerSize = (e) => {
-        console.log(e);
-    }
-
 
     render() {
         return (
