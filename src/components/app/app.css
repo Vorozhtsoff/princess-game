@@ -25,7 +25,7 @@
     position: relative;
     font-family: 'Intro';
     font-weight: 700;
-    backgroundImage: url('../../img/bg.png');
+    background-image: url('../../img/bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     /*max-width: 650px;
