@@ -3,6 +3,7 @@ import { localStorage, getRandomColor } from '../utils';
 import { getAction } from '../sockets/listeners';
 
 const initialState = {
+    isLogged: false,
     color: null,
     name: null
 }
@@ -33,7 +34,7 @@ export const getName = () => ({
 export default function appReducer(state = initialState, action) {
     switch (action.type) {
         case getAction(CHANGE_NAME): return { ...state, ...action.payload };
-        case getAction(USER_LOGIN): return { ...state, ...action.payload };
+        case getAction(USER_LOGIN): return { ...state, ...action.payload, isLogged: true };
         case SELECT_COLOR: return { ...state, color: action.payload };
         case GET_NAME: return { ...state, name: action.payload };
         default: return state;

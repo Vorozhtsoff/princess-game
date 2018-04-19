@@ -35,7 +35,7 @@ canvas {
     right: 0;
     display: block;
     background: url('../img/border.svg') no-repeat;
-    background-size: contain;
+    background-size: 100% 100%;
 }
 
 .map {

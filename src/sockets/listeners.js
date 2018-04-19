@@ -1,6 +1,5 @@
 import { applyListeners, socketEmit } from '../modules/redux-socket';
-import { iterateObject, localStorage } from '../utils';
-import Canvas from '../modules/canvas';
+import { localStorage } from '../utils';
 import { detectDragonKill } from '../reducers/result';
 import {
     GET_STATISTIC_SINGLE,
@@ -15,8 +14,6 @@ import {
     CHANGE_NAME
 } from './event-types';
 
-let canvas = null;
-
 export const DRAGON = 'dragon';
 export const PRINCESS = 'princess';
 
@@ -25,23 +22,10 @@ const playerTypes = {
     phone: PRINCESS
 };
 
-const img = new Image();
-img.src = '/assets/img/map.png';
-
-
 export const getAction = (type) => {
     // console.log(type, `SOCKET_ON_${type}`)
     return `SOCKET_ON_${type}`;
 };
-
-const drawDragon = ({ position, size }) => (
-    canvas.point(position.x, position.y, size, 'blue')
-);
-
-const drawBoom = ({ x, y, radius }) => (
-    radius > 0 && canvas.point(x, y, radius, 'black')
-);
-
 
 const onAnyKill = payload => ({
     type: getAction(DEAD_TO),
@@ -73,78 +57,12 @@ export default applyListeners({
         localStorage.setItem('name', data.name);
         return store.dispatch(setName(data))
     },
-    [GET_AREA]: (data, store) => {
-        canvas = Canvas({
-            area: {
-                left: data.CENTER.x - data.X_SIZE / 2,
-                bottom: data.CENTER.y - data.Y_SIZE / 2,
-                width: data.X_SIZE,
-                height: data.Y_SIZE,
-                z: data.Z_SIZE
-            },
-            image: img,
-            className: 'map',
-            parent: '.mapWrapper',
-            width: window.innerWidth * 0.6936,
-            height: window.innerHeight * 0.6937
-        });
-
-        store.dispatch(getArea(data));
-    },
+    [GET_AREA]: (data, store) => store.dispatch(getArea(data)),
     [CHANGE_NAME]: (data, store) => {
         localStorage.setItem('name', data.name);
         store.dispatch(changeName(data))
     },
-    [GET_SCENE]: (data, store) => {
-        const CROSS = 1;
-
-        if (!canvas) {
-            return;
-        }
-
-        canvas.clear();
-
-        if (data.dragon) {
-            drawDragon(data.dragon);
-        }
-
-        if (data.booms) {
-            iterateObject(data.booms, (prop, { position, radius }) => (
-                drawBoom({ x: position.x, y: position.y, radius })
-            ));
-        }
-
-        if (data.princess) {
-            iterateObject(
-                data.princess,
-                (id, {
-                    position, viewDirect, size, color
-                }) => {
-                    const { x, y } = position;
-                    canvas.line(
-                        x,
-                        y,
-                        x + CROSS * Math.sin(viewDirect),
-                        y + CROSS * Math.cos(viewDirect),
-                        'rgba(0,0,0,1)',
-                        1
-                    );
-
-                    canvas.point(x, y, size, color);
-                }
-            );
-
-            canvas.line(0.6, 2.3, 0.6, 2.3, 'red', 1);
-        }
-
-        if (data.shots) {
-            iterateObject(data.shots, (prop, { position }) => (
-                canvas.point(position.x, position.y, null, 'red')
-            ));
-        }
-
-        store.dispatch(getScene(data));
-    },
+    [GET_SCENE]: (data, store) => store.dispatch(getScene(data)),
     [DEAD_TO]: (data, store) => store.dispatch(onKill(data)),
     [SHOT]: (data) => console.log(SHOT, data),
     [HIT]: (data) => console.log(HIT, data),

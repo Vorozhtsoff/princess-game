@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import once from 'lodash/once';
 import { connect } from 'preact-redux';
 import { socketEmit } from '../../modules/redux-socket';
 import { getAngle } from '../../utils/math';
@@ -19,16 +20,21 @@ import {
 } from '../../sockets';
 
 import styles from './game.css';
+import { drawCanvas } from '../../draw/canvas';
+import { drawMap } from '../../draw/map';
 
 const getSize = v => `${parseInt(v)}px`;
 
 const getSpeed = (x, y) => Math.sqrt(x ** 2 + y ** 2) / 10;
 
-const mapState = ({ app, settings, result }) => ({
+const mapState = ({ app, settings, result, canvas, map }) => ({
     selectedColor: app.color,
     name: app.name,
     deviceType: settings.device,
     userId: settings.userId,
+    isLogged: app.isLogged,
+    canvas,
+    map,
     result
 });
 
@@ -67,14 +73,15 @@ class Game extends Component {
         }
     }
 
-    componentWillMount() {
+    startGame = once(() => this.props.socketEmit(START_GAME))
+    drawCanvas = once(drawCanvas)
+
+    componentDidMount() {
         const {
-            socketEmit,
             resetResult
         } = this.props;
 
         resetResult();
-        socketEmit(START_GAME);
 
         gamepad.setup({
             canvas: 'controller',
@@ -89,6 +96,12 @@ class Game extends Component {
         multikey.setup(gamepad.events, 'qwasbv', true);
     }
 
+    componentWillReceiveProps({ isLogged }) {
+        if (isLogged) {
+            this.startGame();
+        }
+    }
+
     componentWillUnmount() {
         const list = document.getElementsByTagName('canvas');
 
@@ -99,8 +112,13 @@ class Game extends Component {
         this.props.socketEmit(FINISH_GAME);
     }
 
-    render({ result, name }) {
+    render({ result, name, canvas, map }) {
         const { dead, score, kills_count: kills, isDragonKiller } = result;
+        if (Object.keys(canvas).length) {
+            const container = this.drawCanvas(canvas);
+            drawMap(container)(map);
+        }
+
         return (
             <div>
                 <div

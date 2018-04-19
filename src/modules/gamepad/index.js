@@ -36,6 +36,7 @@ let hasRightStick = false;
 const layout = { x: 0, y: 0 };
 const layoutString = BOTTOM_RIGHT;
 const noop = () => null;
+let buttonImage = null;
 
 const handlers = {
     onLeftStick: noop,
@@ -46,6 +47,7 @@ const handlers = {
 };
 
 const state = {
+    buttonImage: null,
     hasStartButton: true,
     hasSelectButton: true,
     startButtonDefault: {
@@ -204,7 +206,12 @@ const controller = {
                 let { r } = button;
                 if (r) {
                     if (button.hit) {
+                        if (state.buttonImage) {
+                            ctx.drawImage(state.buttonImage, 100, 100);
+                        }
+                        // console.log('hit');
                         if (button.hit.active) {
+                            // console.log('hit active');
                             ctx.fillStyle = color;
                             ctx.beginPath();
                             ctx.arc(x, y, r + 5, 0, 2 * Math.PI, false);
@@ -212,6 +219,7 @@ const controller = {
                             ctx.closePath();
                         }
                     }
+
 
                     ctx.fillStyle = color;
                     ctx.beginPath();
