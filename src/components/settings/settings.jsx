@@ -51,34 +51,36 @@ class Settings extends Component {
     render() {
         const { selectedColor, name } = this.props;
         return (
-            <div class={ styles['page-settings'] }>
-                <div class={ styles['name-block'] }>
-                    <p class={ styles.name } >
-                        <div class={ styles.nameInner }>
-                            { name }
-                        </div>
-                    </p>
-                    <div
-                        onClick={ this.handleChangeName }
-                        class={ styles['right-arrow'] }
-                    />
-                </div>
-                <div class={ styles['color-changer'] }>
-                    <div
-                        onClick={ this.handleLeftArrow }
-                        class={ styles['left-arrow'] }
-                    />
-                    <div style={ { backgroundColor: selectedColor } } class={ styles.color } />
-                    <div
-                        onClick={ this.handlerRightArrow }
-                        class={ styles['right-arrow'] }
-                    />
-                </div>
+            <div class={ styles.page }>
+                <div class={ styles.inner }>
+                    <div class={ styles['name-block'] }>
+                        <p class={ styles.name } >
+                            <div class={ styles.nameInner }>
+                                { name }
+                            </div>
+                        </p>
+                        <div
+                            onClick={ this.handleChangeName }
+                            class={ styles['right-arrow'] }
+                        />
+                    </div>
+                    <div class={ styles['color-changer'] }>
+                        <div
+                            onClick={ this.handleLeftArrow }
+                            class={ styles['left-arrow'] }
+                        />
+                        <div style={ { backgroundColor: selectedColor } } class={ styles.color } />
+                        <div
+                            onClick={ this.handlerRightArrow }
+                            class={ styles['right-arrow'] }
+                        />
+                    </div>
 
-                <div class={ styles.actions }>
-                    <ButtonLink href={ '/game' }>
-                        Играть
-                    </ButtonLink>
+                    <div class={ styles.actions }>
+                        <ButtonLink href={ '/game' }>
+                            Играть
+                        </ButtonLink>
+                    </div>
                 </div>
             </div>
         );
