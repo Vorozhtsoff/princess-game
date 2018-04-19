@@ -20,7 +20,7 @@ export default function resultReducer(state = {}, action) {
             return { ...state, ...action.payload };
         }
         case DETECT_DRAGON_KILL: return { ...state, isDragonKiller: true };
-        // case RESET_RESULT: return initialState;
+        case RESET_RESULT: return { ...state, ...initialState };
         default: return state;
     }
 }
