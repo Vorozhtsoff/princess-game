@@ -52,7 +52,7 @@ const setName = payload => ({ type: getAction(USER_LOGIN), payload });
 const changeName = payload => ({ type: getAction(CHANGE_NAME), payload });
 const getDead = payload => ({ type: getAction(DEAD), payload });
 const onGetStatisticSingle = payload => ({ type: getAction(GET_STATISTIC_SINGLE), payload });
-const onGetStatistic = payload => console.log(payload) || ({ type: getAction(GET_STATISTIC), payload });
+const onGetStatistic = payload => ({ type: getAction(GET_STATISTIC), payload });
 
 export default applyListeners({
     [USER_LOGIN]: (data, store) => {
