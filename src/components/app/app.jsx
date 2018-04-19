@@ -3,9 +3,8 @@ import { connect } from 'preact-redux';
 import Router from '../../router';
 import { socketEmit } from '../../modules/redux-socket';
 import { getColor, getName } from '../../reducers/app';
+
 import styles from './app.css';
-import bg from '../../img/bg.png';
-import Rolling from '../rolling';
 
 
 import {
@@ -13,9 +12,6 @@ import {
     GET_STATISTIC_SINGLE
 } from '../../sockets';
 
-const style = {
-    backgroundImage: `url(${bg})`
-}
 
 const mapState = ({ settings, app }) => ({
     selectedColor: app.color,
@@ -68,10 +64,18 @@ class App extends Component {
         this.currentUrl = e.url;
     }
 
+    appRef = (c) => {
+        this.app = c;
+    }
+
     render() {
+        // console.dir(this.app);
+
         return (
-            <div style={ style } class={ styles.app }>
-                <Router />
+            <div class={ styles.wrapper }>
+                <div ref={ this.appRef } class={ styles.app }>
+                    <Router />
+                </div>
             </div>
         );
     }
