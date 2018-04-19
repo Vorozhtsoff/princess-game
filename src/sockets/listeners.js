@@ -3,6 +3,7 @@ import { localStorage } from '../utils';
 import { detectDragonKill } from '../reducers/result';
 import {
     GET_STATISTIC_SINGLE,
+    GET_STATISTIC,
     USER_LOGIN,
     GET_AREA,
     DEAD_TO,
@@ -51,6 +52,7 @@ const setName = payload => ({ type: getAction(USER_LOGIN), payload });
 const changeName = payload => ({ type: getAction(CHANGE_NAME), payload });
 const getDead = payload => ({ type: getAction(DEAD), payload });
 const onGetStatisticSingle = payload => ({ type: getAction(GET_STATISTIC_SINGLE), payload });
+const onGetStatistic = payload => console.log(payload) || ({ type: getAction(GET_STATISTIC), payload });
 
 export default applyListeners({
     [USER_LOGIN]: (data, store) => {
@@ -72,6 +74,7 @@ export default applyListeners({
     [SHOT]: (data) => console.log(SHOT, data),
     [HIT]: (data) => console.log(HIT, data),
     [GET_STATISTIC_SINGLE]: (data, store) => store.dispatch(onGetStatisticSingle(data)),
+    [GET_STATISTIC]: (data, store) => store.dispatch(onGetStatistic(data)),
     [DEAD]: (data, store) => {
         store.dispatch(getDead(data));
         socketEmit(FINISH_GAME);
