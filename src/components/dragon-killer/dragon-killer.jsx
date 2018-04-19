@@ -3,6 +3,9 @@ import { concatClasses } from '../../utils';
 
 import styles from './styles.css';
 
+import title from '../../img/dragon-killer-title.png';
+import head from '../../img/head.png';
+
 
 export default class DragonKiller extends Component {
     render() {
@@ -11,12 +14,12 @@ export default class DragonKiller extends Component {
                 <div className={ styles.inner }>
                     <img
                         class={ concatClasses(styles.title, styles.blockCenter) }
-                        src='../../img/dragon-killer-title.png'
+                        src={ title }
                         alt='это невероятно'
                     />
                     <img
                         class={ concatClasses(styles.logo, styles.blockCenter) }
-                        src='../../img/head.png'
+                        src={ head }
                         alt='logo'
                     />
                     <p class={ styles.text }>

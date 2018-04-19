@@ -5,6 +5,8 @@ import Table from '../table';
 import SimpleLink from '../simple-link';
 
 import styles from './game-result.css';
+import title from '../../img/dead-title.png';
+import death from '../../img/death.png'
 
 
 export default class GameResult extends Component {
@@ -14,7 +16,7 @@ export default class GameResult extends Component {
                 <div class={ styles.leftSide }>
                     <img
                         class={ styles['dead-title'] }
-                        src='../../img/dead-title.png'
+                        src={ title }
                         alt='ты умер в бою'
                     />
                     <p class={ styles.description }>
@@ -25,7 +27,7 @@ export default class GameResult extends Component {
                 <div class={ styles.rightSide }>
                     <img
                         class={ styles.logo }
-                        src='../../img/death.png'
+                        src={ death }
                     />
                     <div class={ styles.name }>{ name }</div>
                     <Table

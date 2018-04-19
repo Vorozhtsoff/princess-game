@@ -4,6 +4,7 @@ import { concatClasses } from '../../utils';
 
 import styles from './statistic.css';
 import img from '../../img/cup.png';
+import title from '../../img/r.png';
 
 
 const mapState = ({ statistic }) => ({ statistic });
@@ -34,7 +35,7 @@ class Statistic extends Component {
     render({ statistic }) {
         return (
             <div class={ styles.page }>
-                <img class={ styles.title } src='../../img/r.png' alt='рейтинг' />
+                <img class={ styles.title } src={ title } alt='рейтинг' />
                 <table class={ styles.table }>
                     { statistic.map(this.renderRow) }
                 </table>
