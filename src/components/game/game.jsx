@@ -115,7 +115,6 @@ class Game extends Component {
     render({ result, name, canvas, map }) {
         const { dead, score, kills_count: kills, isDragonKiller } = result;
         if (Object.keys(canvas).length) {
-            console.log(canvas);
             const container = this.drawCanvas(canvas);
             drawMap(container)(map);
         }
