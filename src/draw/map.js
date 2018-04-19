@@ -8,9 +8,13 @@ export const drawBoom = canvas => ({ x, y, radius }) => (
     radius > 0 && canvas.point(x, y, radius, 'black')
 );
 
-export const drawDragonTarget = canvas => ({ x, y, radius }) => (
-    radius > 0 && canvas.point(x, y, radius, 'rgba(0,0,0,.3)')
+export const drawDragonTarget = canvas => ({ x, y }) => (
+    canvas.point(x, y, 2, 'rgba(255,0,0,0.3)')
 )
+
+export const drawDragonShot = canvas => ({ x, y }) => (
+    canvas.point(x, y, 0.3, 'yellow')
+);
 
 
 export const drawMap = canvas => (data, store) => {
@@ -25,8 +29,16 @@ export const drawMap = canvas => (data, store) => {
     if (data.dragon) {
         drawDragon(canvas)(data.dragon);
 
-        if (data.dragon.shotPosition && data.dragon.boomPosition) {
-            // drawDragonTarget(canvas)(data)
+        const { shotPosition, boomPosition } = data.dragon;
+
+        if (shotPosition) {
+            const { x, y } = shotPosition;
+            drawDragonShot(canvas)({ x, y });
+        }
+
+        if (boomPosition) {
+            const { x, y } = boomPosition;
+            drawDragonTarget(canvas)({ x, y });
         }
     }
 
