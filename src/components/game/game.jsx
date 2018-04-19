@@ -88,17 +88,18 @@ class Game extends Component {
 
         resetResult();
 
-        isClientSide() && gamepad.setup({
-            canvas: 'controller',
-            trace: true,
-            leftStick: true,
-            debug: true,
-            hint: true,
-            onStateChanges: this.handleChange,
-            buttons: [{ name: 'a', key: 'a' }]
-        });
+        if (isClientSide()) {
+            gamepad.setup({
+                trace: true,
+                leftStick: true,
+                debug: true,
+                hint: true,
+                onStateChanges: this.handleChange,
+                buttons: [{ name: 'a', key: 'a' }]
+            });
 
-        multikey.setup(gamepad.events, 'qwasbv', true);
+            multikey.setup(gamepad.events, 'qwasbv', true);
+        }
     }
 
     componentWillReceiveProps({ isLogged }) {

@@ -80,13 +80,10 @@ class App extends Component {
         fullScreen(document.body);
     }
 
-    handleScroll = () => {
-        console.log('scroll');
-    }
 
     render() {
         return (
-            <div onScroll={ this.handleScroll } onClick={ this.getFullscreen } class={ styles.wrapper }>
+            <div onClick={ this.getFullscreen } class={ styles.wrapper }>
                 <div ref={ this.appRef } class={ styles.app }>
                     <Router history={ createHashHistory() } />
                 </div>
