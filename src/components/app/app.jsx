@@ -3,6 +3,7 @@ import { connect } from 'preact-redux';
 import Router from '../../router';
 import { socketEmit } from '../../modules/redux-socket';
 import { getColor, getName } from '../../reducers/app';
+import { fullScreen } from '../../utils';
 
 import styles from './app.css';
 
@@ -57,6 +58,12 @@ class App extends Component {
             name: name || n
         });
         socketEmit(GET_STATISTIC_SINGLE);
+
+        document.body.addEventListener('click', this.getFullscreen);
+    }
+
+    componentWillUnmount() {
+        document.body.removeEventListener('click', this.getFullscreen);
     }
 
 
@@ -68,11 +75,13 @@ class App extends Component {
         this.app = c;
     }
 
-    render() {
-        // console.dir(this.app);
+    getFullscreen = () => {
+        fullScreen(document.body);
+    }
 
+    render() {
         return (
-            <div class={ styles.wrapper }>
+            <div onClick={ this.getFullscreen } class={ styles.wrapper }>
                 <div ref={ this.appRef } class={ styles.app }>
                     <Router />
                 </div>
