@@ -4,6 +4,7 @@ import Router from '../../router';
 import { socketEmit } from '../../modules/redux-socket';
 import { getColor, getName } from '../../reducers/app';
 import { fullScreen } from '../../utils';
+import createHashHistory from 'history/createHashHistory';
 
 import styles from './app.css';
 
@@ -79,11 +80,15 @@ class App extends Component {
         fullScreen(document.body);
     }
 
+    handleScroll = () => {
+        console.log('scroll');
+    }
+
     render() {
         return (
-            <div onClick={ this.getFullscreen } class={ styles.wrapper }>
+            <div onScroll={ this.handleScroll } onClick={ this.getFullscreen } class={ styles.wrapper }>
                 <div ref={ this.appRef } class={ styles.app }>
-                    <Router />
+                    <Router history={ createHashHistory() } />
                 </div>
             </div>
         );

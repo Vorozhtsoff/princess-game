@@ -5,8 +5,8 @@ import { mapRoutes } from './map-routes';
 
 
 export default (config = []) => {
-    return () => (
-        <Router>
+    return ({ history }) => (
+        <Router history={ history }>
             { config.map(mapRoutes) }
         </Router>
     );

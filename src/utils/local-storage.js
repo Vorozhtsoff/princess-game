@@ -1,4 +1,4 @@
-import { isClientSide, noop } from '../utils';
+import { noop } from '../utils';
 
 const localStorageApi = () => global.localStorage || {
     getItem: noop,
