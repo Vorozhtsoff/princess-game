@@ -1,10 +1,11 @@
 import { h, Component } from 'preact';
 
-import Button from '../button';
+import ButtonLink from '../button-link';
+import Table from '../table';
 import SimpleLink from '../simple-link';
-import { Link } from 'preact-router/match';
 
 import styles from './game-result.css';
+
 
 export default class GameResult extends Component {
     render({ score, kills, name }) {
@@ -27,23 +28,16 @@ export default class GameResult extends Component {
                         src='../../img/death.png'
                     />
                     <div class={ styles.name }>{ name }</div>
-                    <dl class={ styles.table }>
-                        <div class={ styles.tableRow }>
-                            <dd><img class={ styles.imgMoney } src='../../img/money.png' /></dd>
-                            <dt>{ score }</dt>
-                        </div>
-                    </dl>
+                    <Table
+                        score={ score }
+                    />
                 </div>
                 <div class={ styles.actions }>
                     <div class={ `${styles.leftSide} ${styles.linksGroup}` }>
                         <SimpleLink href='/'>На главную</SimpleLink>
                     </div>
                     <div class={ `${styles.rightSide} ${styles.center}` }>
-                        <Button>
-                            <Link href='/settings'>
-                                В АТАКУ!
-                            </Link>
-                        </Button>
+                        <ButtonLink href='/settings'> В АТАКУ! </ButtonLink>
                     </div>
                 </div>
             </div>

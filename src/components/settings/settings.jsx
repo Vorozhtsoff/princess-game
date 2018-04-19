@@ -1,9 +1,8 @@
 import { h, Component } from 'preact';
-import { Link } from 'preact-router/match';
 import { socketEmit } from '../../modules/redux-socket';
 import { connect } from 'preact-redux';
 
-import Button from '../button';
+import ButtonLink from '../button-link';
 import style from './style.css';
 
 import { selectColor, getColor } from '../../reducers/app';
@@ -73,11 +72,9 @@ class Settings extends Component {
                 </div>
 
                 <div class={ style.actions }>
-                    <Button>
-                        <Link href={ '/game' }>
-                            Играть
-                        </Link>
-                    </Button>
+                    <ButtonLink href={ '/game' }>
+                        Играть
+                    </ButtonLink>
                 </div>
             </div>
         );
