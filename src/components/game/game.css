@@ -54,6 +54,10 @@ canvas {
     text-align: center;
     padding: 5px 20px 3px;
     margin-bottom: 8px;
+    max-width:30vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .hp {
