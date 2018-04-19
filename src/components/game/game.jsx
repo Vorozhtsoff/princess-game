@@ -11,6 +11,7 @@ import Table from '../table';
 import GameResult from '../game-result';
 import DragonKiller from '../dragon-killer';
 import { resetResult } from '../../reducers/result';
+import { isClientSide } from '../../utils';
 
 import {
     SHOT,
@@ -83,7 +84,7 @@ class Game extends Component {
 
         resetResult();
 
-        gamepad.setup({
+        isClientSide() && gamepad.setup({
             canvas: 'controller',
             trace: true,
             leftStick: true,

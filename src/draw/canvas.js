@@ -1,7 +1,8 @@
 import Canvas from '../modules/canvas';
+import { isClientSide } from '../utils';
 
 
-const img = new Image();
+const img = isClientSide() ? new Image() : {};
 img.src = '/assets/img/map.png';
 
 export const drawCanvas = (data) => {

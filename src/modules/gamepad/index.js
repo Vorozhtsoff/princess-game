@@ -514,6 +514,10 @@ function setup({
     select,
     start
 }) {
+    if(!isClient()) {
+        return false;
+    }
+
     document.addEventListener('touchmove', preventDefault);
     appendCss(canvas);
 
@@ -792,6 +796,8 @@ const emitChanges = (map, cb) => {
     }
 };
 
+const isClient = () => typeof window !== 'undefined';
+
 (function loop() {
     toggle = !toggle;
 
@@ -799,11 +805,14 @@ const emitChanges = (map, cb) => {
         draw(stage.ctx);
         emitChanges(map, handlers.onStateChanges);
     }
-
-    window.requestAnimationFrame(loop);
+    if (isClient()) {
+        window.requestAnimationFrame(loop);
+    }
 }());
 
-window.CanvasRenderingContext2D.prototype.roundRect = roundReact;
+if (isClient()) {
+    window.CanvasRenderingContext2D.prototype.roundRect = roundReact;
+}
 
 const CanvasGamepad = {
     setup,
