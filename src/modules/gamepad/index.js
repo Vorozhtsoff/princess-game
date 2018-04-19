@@ -17,8 +17,6 @@ import {
 } from './consts';
 import { drawDebug, drawTrace } from './helpers';
 
-const { width, height } = getWindowSize();
-
 const scale = [1, 1];
 
 let touches = {};
@@ -36,7 +34,6 @@ let hasRightStick = false;
 const layout = { x: 0, y: 0 };
 const layoutString = BOTTOM_RIGHT;
 const noop = () => null;
-let buttonImage = null;
 
 const handlers = {
     onLeftStick: noop,
@@ -51,7 +48,7 @@ const state = {
     hasStartButton: true,
     hasSelectButton: true,
     startButtonDefault: {
-        x: (width / 2),
+        x: (getWindowSize().width / 2),
         y: -15,
         w: 50,
         h: 15,
@@ -59,7 +56,7 @@ const state = {
         name: 'start'
     },
     selectButtonDefault: {
-        x: (width / 2),
+        x: (getWindowSize().width / 2),
         y: -15,
         w: 50,
         h: 15,
@@ -79,7 +76,7 @@ const buttonLayout = { x: (radius * 3), y: (radius * 3) };
 const stage = {
     canvas: null,
     ctx: null,
-    create(id) {
+    create({ id, height, width }) {
         let element;
         if (id) {
             element = document.getElementById(id);
@@ -97,6 +94,7 @@ const stage = {
         document.body.appendChild(this.canvas);
     },
     adjust() {
+        const { width, height } = getWindowSize();
         this.ctx = this.canvas.getContext('2d');
         this.ctx.canvas.width = width * scale[0];
         this.ctx.canvas.height = height * scale[1];
@@ -108,6 +106,7 @@ const stage = {
 const controller = {
     init() {
         let shift = null;
+        const { width, height } = getWindowSize();
         switch (layoutString) {
             case TOP_LEFT:
                 shift = 0;
@@ -168,15 +167,15 @@ const controller = {
                     };
                 } else {
                     const { hasStartButton, hasSelectButton } = state;
-                    button.x = (width / 2) - button.w;
+                    button.x = (getWindowSize().width / 2) - button.w;
 
                     if (hasStartButton && hasSelectButton) {
                         switch (button.name) {
                             case 'select':
-                                button.x = (width / 2) - button.w - (button.h * 2);
+                                button.x = (getWindowSize().width / 2) - button.w - (button.h * 2);
                                 break;
                             case 'start':
-                                button.x = width / 2;
+                                button.x = getWindowSize().width / 2;
                                 break;
                             default: break;
                         }
@@ -281,7 +280,7 @@ const controller = {
 
                 const dx = touch.x - button.dx;
                 const dy = touch.y - button.dy;
-                let dist = width;
+                let dist = getWindowSize().width;
                 if (button.r) {
                     dist = toDec(Math.sqrt((dx ** 2) + (dy ** 2)));
                 } else if (
@@ -337,6 +336,7 @@ const controller = {
         dx: 0,
         dy: 0,
         init() {
+            const { width } = getWindowSize();
             this.radius = 40;
             this.x = width - (width - layout.x);
             this.y = layout.y;
@@ -414,6 +414,7 @@ const controller = {
         dx: 0,
         dy: 0,
         init() {
+            const { width } = getWindowSize();
             this.radius = 40;
             this.x = width - layout.x;
             this.y = layout.y;
@@ -486,6 +487,7 @@ const controller = {
 };
 
 function init(ctx) {
+    const { width, height } = getWindowSize();
     ctx.fillStyle = 'rgba(0,0,0,0.5)';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -508,13 +510,15 @@ function setup({
     leftStick,
     rightStick,
     onStartButton,
+    height,
+    width,
     onStateChanges,
     onRightStick,
     onLeftStick,
     select,
     start
 }) {
-    if(!isClient()) {
+    if (!isClient()) {
         return false;
     }
 
@@ -525,31 +529,16 @@ function setup({
         buttonsLayout = prepareButtons(buttons, defaultButtonsLoyaout);
     }
 
-    if (rightStick) {
-        hasRightStick = rightStick;
-    }
-
     if (leftStick) {
         hasLeftStick = leftStick;
     }
 
-    if (onStartButton) {
-        handlers.onStartButton = onStartButton;
-    }
 
     if (onStateChanges) {
         handlers.onStateChanges = onStateChanges;
     }
 
-    if (onLeftStick) {
-        handlers.onLeftStick = onLeftStick;
-    }
-
-    if (onRightStick) {
-        handlers.onRightStick = onRightStick;
-    }
-
-    stage.create(canvas);
+    stage.create({ id: canvas, height, width });
 
     if (start) {
         buttonsLayout.push(state.startButtonDefault);
@@ -571,7 +560,7 @@ function draw(ctx) {
         if (debug) {
             drawDebug({
                 fontSize: bit.small,
-                width,
+                width: getWindowSize().width,
                 ctx,
                 map
             });
