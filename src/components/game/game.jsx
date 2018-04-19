@@ -31,6 +31,8 @@ const getSpeed = (x, y) => Math.sqrt(x ** 2 + y ** 2) / 10;
 const mapState = ({ app, settings, result, canvas, map }) => ({
     selectedColor: app.color,
     name: app.name,
+    isLandscape: app.isLandscape,
+    isPortrait: app.isPortrait,
     deviceType: settings.device,
     userId: settings.userId,
     isLogged: app.isLogged,
@@ -83,12 +85,16 @@ class Game extends Component {
 
     componentDidMount() {
         const {
-            resetResult
+            resetResult,
+            isLandscape
         } = this.props;
 
         resetResult();
 
-        if (isClientSide()) {
+        if (
+            isClientSide() &&
+            isLandscape
+        ) {
             gamepad.setup({
                 trace: true,
                 leftStick: true,
