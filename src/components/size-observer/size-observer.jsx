@@ -1,5 +1,5 @@
 import { Component } from 'preact';
-import { isLandscape, isPortrait, noop } from '../../utils';
+import { isLandscape, isPortrait, noop, getAvailableArea } from '../../utils';
 
 
 export default class SizeObserver extends Component {
@@ -9,7 +9,8 @@ export default class SizeObserver extends Component {
 
     detectOrientation = () => ({
         isLandscape: isLandscape(),
-        isPortrait: isPortrait()
+        isPortrait: isPortrait(),
+        ...getAvailableArea()
     })
 
     handler = () => {

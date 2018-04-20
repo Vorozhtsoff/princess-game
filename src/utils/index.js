@@ -8,3 +8,4 @@ export * from './helpers';
 export { default as concatClasses } from './concat-classes';
 export * from './fullscreen';
 export * from './match-media';
+export { default as getAvailableArea } from './get-available-area';
