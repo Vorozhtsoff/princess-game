@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { Link } from 'preact-router/match';
 import { concatClasses } from '../../utils';
 
 import styles from './styles.css';
@@ -29,7 +30,8 @@ export default class DragonKiller extends Component {
                     </p>
                     <p class={ styles.subtext }>
                         Покажи это сообщение организаторам<br />
-                        и готовься надеть VR-шлем
+                        и готовься надеть VR-шлем или { ' ' }
+                        <Link href='/settings' class={ styles.link }>начни заново</Link>
                     </p>
                 </div>
             </div>

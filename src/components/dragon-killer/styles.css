@@ -34,3 +34,8 @@
     text-align: center;
     line-height: 1.35;
 }
+
+.link {
+    color: #fff;
+    text-decoration: underline;
+}
