@@ -23,7 +23,7 @@ canvas {
     left: 50%;
     position: absolute;
     transform: translate(-50%, 0);
-    padding: 3px 0 0 15px;
+    padding: 3px 0 0 1vh;
 }
 
 .mapWrapper:after {
@@ -35,7 +35,7 @@ canvas {
     right: 0;
     display: block;
     background: url('../img/border.svg') no-repeat;
-    background-size: 100% 100%;
+    background-size: contain;
 }
 
 .map {

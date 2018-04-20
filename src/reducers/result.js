@@ -17,7 +17,7 @@ export default function resultReducer(state = {}, action) {
     switch (action.type) {
         case getAction(DEAD): return { ...action.payload, dead: true };
         case getAction(DEAD_TO): return state;
-        case getAction(HIT): console.log(HIT); return { ...state, ...action.payload };
+        case getAction(HIT): return { ...state, ...action.payload };
         case getAction(GET_STATISTIC_SINGLE): {
             return { ...state, ...action.payload };
         }

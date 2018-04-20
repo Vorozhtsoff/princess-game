@@ -22,6 +22,8 @@ const mapState = ({ settings, app }) => ({
     name: app.name,
     deviceType: settings.device,
     colors: settings.colors,
+    width: app.width,
+    height: app.height,
     userId: settings.userId
 });
 
@@ -83,9 +85,12 @@ class App extends Component {
         fullScreen(document.body);
     }
 
-    render() {
+    render({ width, height }) {
         return (
-            <div onClick={ this.getFullscreen } class={ styles.wrapper }>
+            <div
+                styles={ `width: ${width}; height: ${height}` }
+                onClick={ this.getFullscreen } class={ styles.wrapper }
+            >
                 <SizeObserver onResize={ this.props.updateOrientation } />
                 <div ref={ this.appRef } class={ styles.app }>
                     <Router history={ createHashHistory() } />

@@ -25,7 +25,7 @@ export const getColor = (colors) => {
     return { type: SELECT_COLOR, payload: color };
 }
 
-const UPDATE_ORIENTATION = 'UPDATE_ORIENTATION';
+export const UPDATE_ORIENTATION = 'UPDATE_ORIENTATION';
 export const updateOrientation = payload => ({
     type: UPDATE_ORIENTATION,
     payload

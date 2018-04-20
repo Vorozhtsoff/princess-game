@@ -208,9 +208,7 @@ const controller = {
                         if (state.buttonImage) {
                             ctx.drawImage(state.buttonImage, 100, 100);
                         }
-                        // console.log('hit');
                         if (button.hit.active) {
-                            // console.log('hit active');
                             ctx.fillStyle = color;
                             ctx.beginPath();
                             ctx.arc(x, y, r + 5, 0, 2 * Math.PI, false);

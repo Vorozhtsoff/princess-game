@@ -83,6 +83,7 @@ class Game extends Component {
     }
 
     startGame = once(() => this.props.socketEmit(START_GAME))
+
     drawCanvas = once(drawCanvas)
 
     componentDidMount() {
@@ -108,11 +109,18 @@ class Game extends Component {
 
             multikey.setup(gamepad.events, 'a', true);
         }
+        // window.addEventListener('resize', () => alert(`${window.screen.height} ${window.screen.availHeight} ${window.innerHeight}`))
+
+        // alert(`${window.screen.availWidth} ${window.screen.availHeight} ${window.innerHeight}`);
     }
 
-    componentWillReceiveProps({ isLogged }) {
+    componentWillReceiveProps({ isLogged, canvas, map, isLandscape }) {
         if (isLogged) {
             this.startGame();
+        }
+
+        if (canvas.CENTER && this.wrapper && isLandscape) {
+            this.container = this.drawCanvas(canvas);
         }
     }
 
@@ -129,21 +137,22 @@ class Game extends Component {
     render({ result, name, canvas, map }) {
         const { dead, score, kills_count: kills, isDragonKiller } = result;
 
-        if (Object.keys(canvas).length && this.wrapper) {
-            const container = this.drawCanvas(canvas);
-            drawMap(container)(map);
+        if (canvas.CENTER && this.wrapper && this.container) {
+            drawMap(this.container)(map);
         }
 
         return (
-            <div>
+            <div class={ styles.page }>
                 <div
                     ref={ this.setRef('wrapper') }
                     style={ {
-                        width: getSize(canvas.width + 35),
-                        height: getSize(canvas.height + 24)
+                        width: `calc(${getSize(canvas.width)} + 2vh`,
+                        height: `calc(${getSize(canvas.height)} + 3vh)`
                     } }
                     class={ 'mapWrapper' }
-                />
+                >
+                    <canvas class='map' ref={ this.setRef('canvas') } />
+                </div>
                 <div class={ styles.resultPlay }>
                     <div class={ styles.name }>{ name }</div>
                     <div class={ styles.scoreWrapper }>

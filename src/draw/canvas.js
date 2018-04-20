@@ -15,7 +15,7 @@ export const drawCanvas = (data) => {
             z: data.Z_SIZE
         },
         image: img,
-        className: 'map',
+        canvasSelector: '.map',
         parent: '.mapWrapper',
         width: data.width,
         height: data.height
