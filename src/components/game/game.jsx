@@ -51,7 +51,7 @@ const getGradient = (percent) => `linear-gradient(to right, #EB5757 ${percent}%,
 class Game extends Component {
     interval = null;
     socketEmitThrottle = throttle((action, payload) => this.props.socketEmit(action, payload), 50)
-    socketEmitThrottleLong = throttle((action, payload) => this.props.socketEmit(action, payload), 50)
+    socketEmitThrottleLong = throttle((action, payload) => this.props.socketEmit(action, payload), 1500)
 
     stopMoving = data => this.props.socketEmit(MOVE_PERSON, {
         moveDirect: getAngle(data['x-axis'], data['y-axis']),
