@@ -82,6 +82,17 @@ canvas {
 
 
 @media screen and (orientation:portrait) {
+
+    body:before {
+        content: '';
+        display: block;
+        position: absolute;
+        background: url('../../img/bg.png') repeat-y;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+    }
+
     .page {
         position: relative;
         width: 100vw;

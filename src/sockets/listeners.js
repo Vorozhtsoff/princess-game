@@ -25,7 +25,6 @@ const playerTypes = {
 };
 
 export const getAction = (type) => {
-    // console.log(type, `SOCKET_ON_${type}`)
     return `SOCKET_ON_${type}`;
 };
 
@@ -81,7 +80,7 @@ export default applyListeners({
         }
     })(),
     [DEAD_TO]: (data, store) => store.dispatch(onKill(data)),
-    [SHOT]: (data) => console.log(SHOT, data),
+    [SHOT]: data => data,
     [HIT]: (data, store) => store.dispatch(onHit({ hp: data.targetLife * 100 / INITIAL_HP })),
     [GET_STATISTIC_SINGLE]: (data, store) => store.dispatch(onGetStatisticSingle(data)),
     [GET_STATISTIC]: (data, store) => store.dispatch(onGetStatistic(data)),

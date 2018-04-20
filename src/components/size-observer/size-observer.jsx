@@ -13,8 +13,22 @@ export default class SizeObserver extends Component {
         ...getAvailableArea()
     })
 
+    body = document.body
+
     handler = () => {
-        this.props.onResize(this.detectOrientation());
+        const result = this.detectOrientation();
+        this.props.onResize(result);
+        this.classSetter(result);
+    }
+
+    memo = null;
+    classSetter = ({ isLandscape }) => {
+        const className = isLandscape ? 'landscape' : 'portrait';
+        if (this.memo !== className) {
+            this.body.classList.remove(this.memo);
+            this.body.classList.add(className);
+            this.memo = className;
+        }
     }
 
     componentWillMount() {
@@ -22,10 +36,11 @@ export default class SizeObserver extends Component {
     }
 
     componentDidMount() {
-        this.props.onResize(this.detectOrientation());
+        this.handler();
     }
 
     componentWillUnmount() {
+        this.body.classList.remove(this.memo);
         window.removeEventListener('resize', this.handler);
     }
 
