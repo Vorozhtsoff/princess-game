@@ -3,3 +3,7 @@
     text-decoration: none;
     display: inline-block;
 }
+
+.link + .link {
+    margin-left: 14px;
+}

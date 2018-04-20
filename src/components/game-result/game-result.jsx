@@ -36,7 +36,8 @@ export default class GameResult extends Component {
                 </div>
                 <div class={ styles.actions }>
                     <div class={ `${styles.leftSide} ${styles.linksGroup}` }>
-                        <SimpleLink href='/'>На главную</SimpleLink>
+                        <SimpleLink href='/'>На главную</SimpleLink>{ ' ' }
+                        <SimpleLink href='/results'>Рейтинг</SimpleLink>
                     </div>
                     <div class={ `${styles.rightSide} ${styles.center}` }>
                         <ButtonLink href='/settings'> В АТАКУ! </ButtonLink>
