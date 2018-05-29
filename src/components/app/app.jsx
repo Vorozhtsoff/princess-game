@@ -90,7 +90,8 @@ class App extends Component {
         return (
             <div
                 style={ `width: ${width}px; height: ${height}px;` }
-                onClick={ this.getFullscreen } class={ styles.wrapper }
+                onClick={ this.getFullscreen }
+                class={ styles.wrapper }
             >
                 <IOsAdapter />
                 <SizeObserver onResize={ this.props.updateOrientation } />

@@ -1,7 +1,4 @@
 .main {
-    background: url('../../img/bg.png') no-repeat;
-    background-size: cover;
-    background-position: 0 -100px;
     padding: 40px;
     position: absolute;
     top: 0;
@@ -9,6 +6,10 @@
     left: 0;
     right: 0;
     z-index: 9999;
+}
+
+.shift {
+    transform: translateY(-10%)
 }
 
 .blockCenter {
@@ -44,6 +45,7 @@
         transform: translate(-2000px, 0);
         padding: 0;
         height: 0;
+        margin: 0;
         line-height: 1.3;
     }
 }
