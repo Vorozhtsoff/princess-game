@@ -6,6 +6,7 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build",
+    "custom-build": "preact build --clean --no-prerender --template ./src/index.html",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src",
