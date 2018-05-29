@@ -7,6 +7,7 @@ import { fullScreen } from '../../utils';
 import createHashHistory from 'history/createHashHistory';
 
 import SizeObserver from '../size-observer';
+import IOsAdapter from '../ios-adapter';
 
 import styles from './app.css';
 
@@ -88,9 +89,10 @@ class App extends Component {
     render({ width, height }) {
         return (
             <div
-                styles={ `width: ${width}; height: ${height}` }
+                style={ `width: ${width}px; height: ${height}px;` }
                 onClick={ this.getFullscreen } class={ styles.wrapper }
             >
+                <IOsAdapter />
                 <SizeObserver onResize={ this.props.updateOrientation } />
                 <div ref={ this.appRef } class={ styles.app }>
                     <Router history={ createHashHistory() } />

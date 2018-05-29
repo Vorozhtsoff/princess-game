@@ -12,7 +12,7 @@ export default function configureStore(initState = {}) {
 
     const composeEnhancers = global[EXT_NAME] ? global[EXT_NAME]({}) : compose;
 
-    const store = createStore(
+    return createStore(
         reducers,
         initState,
         composeEnhancers(
@@ -22,6 +22,4 @@ export default function configureStore(initState = {}) {
             )
         )
     );
-
-    return store;
 }
